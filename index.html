@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>给未来写封信APP-常见问题</title>
+		<style>
+			html{
+				background-image: url(img/letter_bkg.png);
+				text-shadow:0px -1px 2px #58838366;
+			}
+			.boxLanguage{
+				font-size: 0.3rem;
+				height: 50px;
+				text-align: right;
+				line-height: 50px;
+				position: relative;
+				color: #2D2D2D;
+				background-color:transparent;
+			}
+			.boxLanguage a{
+				font-size: 0.3rem;
+				height: 50px;
+				text-align: right;
+				line-height: 50px;
+				position: relative;
+				color: #0063B1;
+				background-color:transparent;
+			}
+			.title {
+				line-height: 0.9rem;
+				font-size: 0.32rem;
+				color: #767171;
+				padding: 0 0.24rem;
+				position: relative;
+				font-weight:bold;
+				border-bottom: 1px solid #E6E6E6;
+			}
+
+			.title .icon {
+				position: absolute;
+				right: 0.24rem;
+				top: 50%;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				width: 0.24rem;
+				display: block;
+				transition: 0.5s;
+			}
+			
+			.queueItem.active .title .icon {
+				-webkit-transform: translateY(-50%) rotateZ(-180deg);
+				transform: translateY(-50%) rotateZ(-180deg);
+			}
+			
+			.answer {
+				height: 0;
+				transition: height 0.5s;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+			.announcement {
+				padding: 0.1rem 0.24rem;
+				font-size: 0.3rem;
+				color: #767171;
+				background-color:transparent;
+				white-space: pre-wrap;
+			}
+			.announcement p {
+				display: block;
+				margin-block-start: 0em;
+				margin-block-end: 0em;
+				margin-inline-start: 0px;
+				margin-inline-end: 0px;
+			}
+			.answer>div {
+				padding: 0.4rem 0.24rem;
+				font-size: 0.3rem;
+				color: #767171;
+				background-color:transparent;
+				line-height: 0.42rem;
+				white-space: pre-wrap;
+			}
+			.answer>p {
+				padding: 16px;
+				overflow: auto;
+				margin-top: 0px;
+				font-size: 0.2rem;
+				color: #BEBEBE;
+				border-radius: 3px;
+				background-color: #515151;
+				border-radius: 3px;
+				font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+				white-space: pre-wrap;
+			}
+			.answer>a {
+				padding: 16px;
+				overflow: auto;
+				margin-top: 0px;
+				font-size: 0.2rem;
+				color: #0063B1;
+				border-radius: 3px;
+				background-color: #515151;
+				border-radius: 3px;
+				font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+				white-space: pre-wrap;
+			}
+			.answer>img {
+				padding: 0rem;
+				width:100%;
+				color: #2D2D2D;
+				background-color:transparent;
+				white-space: pre-wrap;
+			}
+			.answer2>div {
+				padding: 0.4rem 0.24rem;
+				font-size: 0.3rem;
+				color: #2D2D2D;
+				background-color:transparent;
+				line-height: 0.42rem;
+				white-space: pre-wrap;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="boxLanguage">简体中文&nbsp;&nbsp;<a href="traditional.html">繁體中文</a>&nbsp;&nbsp;<a href="eng.html">English</a></div>
+		<div id="questions">
+			<div class="title">
+					⚠️公告
+				</div>
+				<div class="announcement">
+					<div><p>1. 为了保证寄信体验，我们会定期清理无效邮箱的信件和测试信件，清理后不可恢复。</p>
+<p>2. 如需帮助可联系客服邮箱 letter@to-future.net 写明信件类型和问题描述，纸质信件请提供收件人姓名和电话/电子信件请提供收信邮箱/微信信件请提供微信昵称。</p>
+<p>3. 我们一直在征集有声信件，有意者可录制一段读信 Demo（最好有背景乐），投稿给我们，就有机会让你的声音出现在软件里~ 邮箱voice@to-future.net</p>
+				</div>
+			</div>
+			<div class="queueItem" v-for="(item,index) of list" :key="index" @click="titleClick(index)" :class="item.open?'active':''">
+				<div class="title">
+					{{item.question}}
+					<img src="img/slide_icon.png" class="icon">
+				</div>
+				<div class="answer" :id="item.pid" v-if="item.open != null">
+					<div>{{item.answer}}</div>
+					<img :src="item.image"  v-if="item.image != null" />
+					<div  v-if="item.answer2 != null">{{item.answer2}}</div>
+					<img :src="item.image2"  v-if="item.image2 != null" />
+				</div>
+			</div>
+			<div class="title">
+					ℹ️尾巴
+				</div>
+				<div class="announcement">
+					<div><p>我们一直在征集有声信件，有意者可录制一段读信&nbsp;Demo（最好有背景乐），投稿给我们，就有机会让你的声音出现在软件里~&nbsp;邮箱voice@to-future.net<br><br>如需帮助，可联系邮箱&nbsp;letter@to-future.net<br>写明信件类型和问题描述，纸质信件请提供收件人姓名和电话/电子信件请提供收信邮箱/微信信件请提供微信昵称。&nbsp;我们会在2个工作日内处理并回复。<br><br>更新日期：2019年10月27日</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/rem.js"></script>
+		<script type="text/javascript">
+			new Vue({
+				el: "#questions",
+				data: {
+					defaultOp: -1,
+					title: "",
+					list: []
+				},
+				mounted: function() {
+					this.getData();
+				},
+				methods: {
+					getData: function() {
+						var that = this;
+						var info = {
+							"title": "常见问题",
+							"list": [{
+								"id": 1,
+								"question": "1.收信邮箱怎么写？",
+								"answer": "写你自己的电子邮箱，格式一定要正确！比如 123456@qq.com\n常见错误有：\n  letter@to-future.net（这是我的邮箱）\n  example@example.com（这是举例邮箱）\n  email@qq.com（这是空邮箱）\n  123@qq。com（有中文句号）\n  www.123@qq.com（有www.）\n  qq@123.com（顺序错误）\n  123@123.com（格式错误）\n  con（com错误拼写成con）\n  com后面多空格\n  @前面多空格\n  .@前面多个\"点\"\n  @.后面多个\"点\"\n*另外注意，很多人寄QQ邮箱，即使格式正确，但该邮箱如果未开通，也依然不行。写给别人前请确认邮箱可用。"
+							}, {
+								"id": 2,
+								"question": "2.已经寄出的信发现邮箱写错，能不能改？",
+								"answer": "请按照以下格式发邮件至 letter@to-future.net 人工处理完后会邮件回复，只有一次机会哦。\n    标题：更改邮箱\n    正文：错误邮箱 xxxxxx，正确邮箱 xxxxxx\n*仅支持真的是邮箱格式写错的情况，而不是换收信邮箱\n*后悔想撤销的直说就好，不要以改邮箱为由忽悠我→_→"
+							}, {
+								"id": 3,
+								"question": "3.没有电子邮箱怎么办？",
+								"answer": "① 可以自己申请QQ邮箱、网易163邮箱\n② 选择纸质信件，可以像快递一样寄给你。",
+								"image":"img/img_real_letter.jpg",
+								"answer2": "③ 选择微信信件，无需邮箱，可以通过给未来写封信微信公众号收取信件，在线查看。但仅适用于寄给自己的信。",
+								"image2":"img/img_wechat_remind.jpg"
+							}, {
+								"id": 4,
+								"question": "4.没有收到信？",
+								"answer": "① 50%概率，邮箱写错，正确邮箱格式请看常见问题。\n② 20%概率，陌生邮件被你的邮箱误识别在垃圾邮件分类，标题为《来自很久以前的一封信》。\n③ 10%概率，时间选错，或误认为是当天。\n④ 10%概率，发送字数较少的无意义或测试信件，或包含敏感、恶意辱骂、广告词，被永久关进小黑屋。\n⑤ 5%概率，被你的邮箱运营商拦截了，常见于icloud、189、139、wo邮箱。这种情况我们也控制不了，抱歉。\n⑥ 5%概率。当天寄信量特别多，如1月1日、2月14日、农历春节、9月开学、12月25日等，将顺延1~2天。\n*强烈建议使用寄信提醒功能，这样可以很明确的知道什么时候有信件寄出，好查阅邮箱。"
+							}, {
+								"id": 5,
+								"question": "5.「寄信提醒」会出现微信相关信息吗？",
+								"answer": "此功能需要绑定微信只是为了在邮件寄出的同时，通过微信公众号通知你而已，信件内容不会出现任何微信相关信息。"
+							}, {
+								"id": 6,
+								"question": "6.「寄信提醒」和「微信收信」怎么用？",
+								"answer": "寄信提醒：\n  ① 在App中寄信页面登录微信\n  ② 关注给未来写封信公众号并点击底部菜单「绑定 - 寄信提醒」，按提示操作即可\n在电子邮件寄出的同时，通过本微信公众号推送一条消息告知您。\n------------\n微信信件：\n  ① 在App寄信时选择“微信信件”类型并登录\n  ② 关注给未来写封信公众号并点击底部菜单「绑定 - 微信信件」，按提示操作即可\n等信件到达送信时间后，会在本微信公众号内推送通知，点击可直接在线查看信件。"
+							}, {
+								"id": 7,
+								"question": "7.我的手机添加照片时为什么不能多选？",
+								"answer": "这是你系统自带相册，在选择照片时没有默认呈现出多选的样式，造成只能单选的误解。\n其实你只要长按第一张照片，则会激活多选功能，接着再选择其他照片即可。",
+								"image":"img/select_img_android.gif",
+								"imageHeight":"720px"
+							}, {
+								"id": 8,
+								"question": "8.关于纸质信件",
+								"answer": "① 不包含录音和照片内容\n② 目前寄送范围仅支持中国大陆（内地）及港澳台。如果你需要寄到国际城市，由于快递费用较高，可以联系我单独处理 letter@to-future.net\n③ 法定节假日无法寄送信件"
+							}, {
+								"id": 9,
+								"question": "9.能不能查写过的信？",
+								"answer": "既然写完寄出了，就不要总想着这件事，等收到再说~\n如果一直能看到写过的信，那就失去了未来寄给你的意义和惊喜。"
+							}, {
+								"id": 10,
+								"question": "10.进了小黑屋怎么办？",
+								"answer": "如果你寄信时提示被关进小黑屋，代表至少有下列一种行为：\n  ① 发送字数较少的无意义或测试信件\n  ② 给多个不同邮箱/无效邮箱频繁发送信件\n  ③ 发送匿名信件\n  ④ 信件内容违反《给未来写封信内容规范》\n如有疑问，可邮件至 letter@to-future.net 进行申诉。邮件正文请写申诉理由和曾寄出信件的收信邮箱。若48小时内未回复邮件，则表示申诉不通过。"
+							}, {
+								"id": 11,
+								"question": "11	.为何录音、照片和纸质信件要收费？",
+								"answer": "因为我们要定期支付服务器费用、邮件发送费用、云存储费用，这些都是不小的成本，请理解。\n我们为了保持纯粹，拒绝了很多广告合作，也没有其他流氓的灰色收入，一直在贴钱做这款产品。大家的好评和每天都在寄出的感动，让我们心甘情愿坚持。能少一些负担，我们也是很开心的（´v｀）"
+							}]
+						}
+
+						if(info.list) {
+							var list = info.list;
+							var arr = [];
+							for(var i = 0; i < list.length; i++) {
+								var obj = list[i];
+								obj["open"] = null;
+								obj["pid"] = "itemPId" + i;
+								arr.push(obj);
+							}
+							that.list = arr;
+						}
+
+					},
+					titleClick: function(index) {
+						var obj = this.list[index];
+						obj.open = !obj.open;
+						this.list[index] = obj;
+						setTimeout(function() {
+							var pid = "itemPId" + index;
+							var pdom = document.getElementById(pid);
+							if(obj.open) {
+								pdom.style.height = pdom.scrollHeight + "px";
+								console.log(pdom.scrollHeight)
+							} else {
+								pdom.style.height = 0;
+							}
+						}, 1);
+					}
+				}
+			})
+		</script>
+		<script type="text/javascript">
+			var images = new Array()
+            function preload() {
+                for (i = 0; i < preload.arguments.length; i++) {
+                    images[i] = new Image()
+                    images[i].src = preload.arguments[i]
+                }
+            }
+            preload(
+                "img/img_real_letter.jpg",
+                "img/img_wechat_remind.jpg",
+                "img/select_img_android.gif"
+            )
+		</script>
+	</body>
+
+</html>

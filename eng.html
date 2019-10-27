@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>ToFuture App-FAQ</title>
+		<style>
+			html{
+				background-image: url(img/letter_bkg.png);
+				text-shadow:0px -1px 2px #58838366;
+			}
+			.boxLanguage{
+				font-size: 0.3rem;
+				height: 50px;
+				text-align: right;
+				line-height: 50px;
+				position: relative;
+				color: #2D2D2D;
+				background-color:transparent;
+			}
+			.boxLanguage a{
+				font-size: 0.3rem;
+				height: 50px;
+				text-align: right;
+				line-height: 50px;
+				position: relative;
+				color: #0063B1;
+				background-color:transparent;
+			}
+			.title {
+				line-height: 0.9rem;
+				font-size: 0.32rem;
+				color: #767171;
+				padding: 0 0.24rem;
+				position: relative;
+				font-weight:bold;
+				border-bottom: 1px solid #E6E6E6;
+			}
+
+			.title .icon {
+				position: absolute;
+				right: 0.24rem;
+				top: 50%;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				width: 0.24rem;
+				display: block;
+				transition: 0.5s;
+			}
+			
+			.queueItem.active .title .icon {
+				-webkit-transform: translateY(-50%) rotateZ(-180deg);
+				transform: translateY(-50%) rotateZ(-180deg);
+			}
+			
+			.answer {
+				height: 0;
+				transition: height 0.5s;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+			.announcement {
+				padding: 0.1rem 0.24rem;
+				font-size: 0.3rem;
+				color: #767171;
+				background-color:transparent;
+				white-space: pre-wrap;
+			}
+			.announcement p {
+				display: block;
+				margin-block-start: 0em;
+				margin-block-end: 0em;
+				margin-inline-start: 0px;
+				margin-inline-end: 0px;
+			}
+			.answer>div {
+				padding: 0.4rem 0.24rem;
+				font-size: 0.3rem;
+				color: #767171;
+				background-color:transparent;
+				line-height: 0.42rem;
+				white-space: pre-wrap;
+			}
+			.answer>p {
+				padding: 16px;
+				overflow: auto;
+				margin-top: 0px;
+				font-size: 0.2rem;
+				color: #BEBEBE;
+				border-radius: 3px;
+				background-color: #515151;
+				border-radius: 3px;
+				font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+				white-space: pre-wrap;
+			}
+			.answer>a {
+				padding: 16px;
+				overflow: auto;
+				margin-top: 0px;
+				font-size: 0.2rem;
+				color: #0063B1;
+				border-radius: 3px;
+				background-color: #515151;
+				border-radius: 3px;
+				font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+				white-space: pre-wrap;
+			}
+			.answer>img {
+				padding: 0rem;
+				width:100%;
+				color: #2D2D2D;
+				background-color:transparent;
+				white-space: pre-wrap;
+			}
+			.answer2>div {
+				padding: 0.4rem 0.24rem;
+				font-size: 0.3rem;
+				color: #2D2D2D;
+				background-color:transparent;
+				line-height: 0.42rem;
+				white-space: pre-wrap;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="boxLanguage"><a href="index.html">简体中文</a>&nbsp;&nbsp;<a href="traditional.html">繁體中文</a>&nbsp;&nbsp;English</div>
+		<div id="questions">
+			<div class="title">
+					⚠️FAQ
+				</div>
+				<div class="announcement">
+					<div><p>Special note: In order to ensure the mailing experience, we will regularly clean up the letters of the invalid mailbox, which cannot be recovered after cleaning.</p>
+				</div>
+			</div>
+			<div class="queueItem" v-for="(item,index) of list" :key="index" @click="titleClick(index)" :class="item.open?'active':''">
+				<div class="title">
+					{{item.question}}
+					<img src="img/slide_icon.png" class="icon">
+				</div>
+				<div class="answer" :id="item.pid" v-if="item.open != null">
+					<div>{{item.answer}}</div>
+					<img :src="item.image"  v-if="item.image != null" />
+					<div  v-if="item.answer2 != null">{{item.answer2}}</div>
+					<img :src="item.image2"  v-if="item.image2 != null" />
+				</div>
+			</div>
+			<div class="title">
+					ℹ️Service
+				</div>
+				<div class="announcement">
+					<div><p>support letter@to-future.net<br><br>Updated: October 27, 2019</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/rem.js"></script>
+		<script type="text/javascript">
+			new Vue({
+				el: "#questions",
+				data: {
+					defaultOp: -1,
+					title: "",
+					list: []
+				},
+				mounted: function() {
+					this.getData();
+				},
+				methods: {
+					getData: function() {
+						var that = this;
+						var info = {
+							"title": "FAQ",
+							"list": [{
+								"id": 1,
+								"question": "About mail format",
+								"answer": "The mail format must be correct! E.g 123456@gmail.com\nCommon mistakes:\n  letter@to-future.net\n  example@example.com\n  email@gmail.com\n  www.123@gmail.com\n  gmail@123.com\n  con (com spelled into con)\n  com With spaces\n  gamil (wrong adress)\n  @ With spaces\n  .@\n  @."
+							}, {
+								"id": 2,
+								"question": "About not receiving mail",
+								"answer": "① 60% Email address is wrong\n② 20% In spam\n③ 10% Content contains sensitive words, on the blacklist\n④ 5% Blocked directly by the mail operator\n⑤ 5% There are a lot of letters on the day, the delivery work can't be completed, and it will be postponed until the next day"
+							}, {
+								"id": 3,
+								"question": "Can I check the letter I have sent?",
+								"answer": "After the letter is sent, withdrawal and search are not allowed"
+							}, {
+								"id": 4,
+								"question": "How to remove the blacklist?",
+								"answer": "You can send an appeal email to letter@to-future.net"
+							}]
+						}
+
+						if(info.list) {
+							var list = info.list;
+							var arr = [];
+							for(var i = 0; i < list.length; i++) {
+								var obj = list[i];
+								obj["open"] = null;
+								obj["pid"] = "itemPId" + i;
+								arr.push(obj);
+							}
+							that.list = arr;
+						}
+
+					},
+					titleClick: function(index) {
+						var obj = this.list[index];
+						obj.open = !obj.open;
+						this.list[index] = obj;
+						setTimeout(function() {
+							var pid = "itemPId" + index;
+							var pdom = document.getElementById(pid);
+							if(obj.open) {
+								pdom.style.height = pdom.scrollHeight + "px";
+								console.log(pdom.scrollHeight)
+							} else {
+								pdom.style.height = 0;
+							}
+						}, 1);
+					}
+				}
+			})
+		</script>
+		<script type="text/javascript">
+			var images = new Array()
+            function preload() {
+                for (i = 0; i < preload.arguments.length; i++) {
+                    images[i] = new Image()
+                    images[i].src = preload.arguments[i]
+                }
+            }
+            preload(
+                "img/img_real_letter.jpg",
+                "img/img_wechat_remind.jpg",
+                "img/select_img_android.gif"
+            )
+		</script>
+	</body>
+
+</html>

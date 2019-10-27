@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>給未來寫封信APP-常見問題</title>
+		<style>
+			html{
+				background-image: url(img/letter_bkg.png);
+				text-shadow:0px -1px 2px #58838366;
+			}
+			.boxLanguage{
+				font-size: 0.3rem;
+				height: 50px;
+				text-align: right;
+				line-height: 50px;
+				position: relative;
+				color: #2D2D2D;
+				background-color:transparent;
+			}
+			.boxLanguage a{
+				font-size: 0.3rem;
+				height: 50px;
+				text-align: right;
+				line-height: 50px;
+				position: relative;
+				color: #0063B1;
+				background-color:transparent;
+			}
+			.title {
+				line-height: 0.9rem;
+				font-size: 0.32rem;
+				color: #767171;
+				padding: 0 0.24rem;
+				position: relative;
+				font-weight:bold;
+				border-bottom: 1px solid #E6E6E6;
+			}
+
+			.title .icon {
+				position: absolute;
+				right: 0.24rem;
+				top: 50%;
+				-webkit-transform: translateY(-50%);
+				transform: translateY(-50%);
+				width: 0.24rem;
+				display: block;
+				transition: 0.5s;
+			}
+			
+			.queueItem.active .title .icon {
+				-webkit-transform: translateY(-50%) rotateZ(-180deg);
+				transform: translateY(-50%) rotateZ(-180deg);
+			}
+			
+			.answer {
+				height: 0;
+				transition: height 0.5s;
+				box-sizing: border-box;
+				overflow: hidden;
+			}
+			.announcement {
+				padding: 0.1rem 0.24rem;
+				font-size: 0.3rem;
+				color: #767171;
+				background-color:transparent;
+				white-space: pre-wrap;
+			}
+			.announcement p {
+				display: block;
+				margin-block-start: 0em;
+				margin-block-end: 0em;
+				margin-inline-start: 0px;
+				margin-inline-end: 0px;
+			}
+			.answer>div {
+				padding: 0.4rem 0.24rem;
+				font-size: 0.3rem;
+				color: #767171;
+				background-color:transparent;
+				line-height: 0.42rem;
+				white-space: pre-wrap;
+			}
+			.answer>p {
+				padding: 16px;
+				overflow: auto;
+				margin-top: 0px;
+				font-size: 0.2rem;
+				color: #BEBEBE;
+				border-radius: 3px;
+				background-color: #515151;
+				border-radius: 3px;
+				font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+				white-space: pre-wrap;
+			}
+			.answer>a {
+				padding: 16px;
+				overflow: auto;
+				margin-top: 0px;
+				font-size: 0.2rem;
+				color: #0063B1;
+				border-radius: 3px;
+				background-color: #515151;
+				border-radius: 3px;
+				font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+				white-space: pre-wrap;
+			}
+			.answer>img {
+				padding: 0rem;
+				width:100%;
+				color: #2D2D2D;
+				background-color:transparent;
+				white-space: pre-wrap;
+			}
+			.answer2>div {
+				padding: 0.4rem 0.24rem;
+				font-size: 0.3rem;
+				color: #2D2D2D;
+				background-color:transparent;
+				line-height: 0.42rem;
+				white-space: pre-wrap;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="boxLanguage"><a href="index.html">简体中文</a>&nbsp;&nbsp;繁體中文&nbsp;&nbsp;<a href="eng.html">English</a></div>
+		<div id="questions">
+			<div class="title">
+					⚠️公告
+				</div>
+				<div class="announcement">
+					<div><p>1.&nbsp;為了保證寄信體驗，我們會定期清理無效郵箱的信件，清理後不可恢復。<br>2.&nbsp;如需幫助可聯繫客服郵箱&nbsp;letter@to-future.net&nbsp;寫明信件類型和問題描述，紙質信件請提供收件人姓名和電話/電子信件請提供收信郵箱/微信信件請提供微信暱稱。<br>3.&nbsp;我們一直在徵集有聲信件，有意者可錄製一段讀信&nbsp;Demo（最好有背景樂），投稿給我們，就有機會讓你的聲音出現在軟件裡~&nbsp;郵箱voice@to-future.net</p>
+				</div>
+			</div>
+			<div class="queueItem" v-for="(item,index) of list" :key="index" @click="titleClick(index)" :class="item.open?'active':''">
+				<div class="title">
+					{{item.question}}
+					<img src="img/slide_icon.png" class="icon">
+				</div>
+				<div class="answer" :id="item.pid" v-if="item.open != null">
+					<div>{{item.answer}}</div>
+					<img :src="item.image"  v-if="item.image != null" />
+					<div  v-if="item.answer2 != null">{{item.answer2}}</div>
+					<img :src="item.image2"  v-if="item.image2 != null" />
+				</div>
+			</div>
+			<div class="title">
+					ℹ️尾巴
+				</div>
+				<div class="announcement">
+					<div><p>有聲信箱正在徵集好聽的聲音，有意者可自己錄製一段讀信音訊&nbsp;Demo（最好有背景樂），郵件至&nbsp;voice@to-future.net<br><br>有任何使用問題，也可郵件至&nbsp;letter@to-future.net<br>寫明信件類型和問題描述，紙質信件請提供收件人姓名和電話/電子信件請提供收信郵箱。<br>我們會在2個工作日內處理並回復。<br><br>更新日期：2019年05月03日</p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/rem.js"></script>
+		<script type="text/javascript">
+			new Vue({
+				el: "#questions",
+				data: {
+					defaultOp: -1,
+					title: "",
+					list: []
+				},
+				mounted: function() {
+					this.getData();
+				},
+				methods: {
+					getData: function() {
+						var that = this;
+						var info = {
+							"title": "常見問題",
+							"list": [{
+								"id": 1,
+								"question": "1.收信郵箱寫哪裡？",
+								"answer": "寫你自己的電子郵箱，格式一定要正確！比如 123456@gmail.com\n常見錯誤有：\n  letter@to-future.net（這是我的郵箱）\n  example@example.com（這是舉例郵箱）\n  email@gmail.com（這是空郵箱）\n  123@gmail。com（有中文句號）\n  www.123@gmail.com（有www.）\n  gmail@123.com（順序錯誤）\n  con（com錯誤拼寫成con）\n  com後面多空格\n  gamil（拼寫錯誤）\n  yaho（拼寫錯誤）\n  @前面多空格\n  .@前面多個\"點\"\n  @.後面多個\"點\"\n*另外注意，很多人寄 outlook 和 yahoo 信箱，但因為 outlook 和 yahoo 的反垃圾郵件機制非常嚴格，陌生信箱發送郵件容易被屏蔽。"
+							}, {
+								"id": 2,
+								"question": "2.已經寄出的信發現郵箱寫錯，能不能改？",
+								"answer": "請按照以下格式發郵件至 letter@to-future.net 人工處理完後會郵件回復，只有一次機會哦。\n    標題：更改郵箱\n    正文：錯誤郵箱 xxxxxx，正確郵箱 xxxxxx\n*僅支持真的是郵箱格式寫錯的情況，而不是換收信郵箱，否則不處理不回復。"
+							}, {
+								"id": 3,
+								"question": "3.沒有電子郵箱怎麼辦？",
+								"answer": "① 可以自己申請 gmail 郵箱\n② 給未來寫封信3.0起已提供慢遞真實紙質信件服務，可以像快遞一樣寄給你"
+							}, {
+								"id": 4,
+								"question": "4.沒有收到信？",
+								"answer": "① 50%概率，郵箱寫錯，正確郵箱格式請看常見問題。\n② 20%概率，陌生郵件被你的郵箱誤識別在垃圾郵件分類，標題為《來自很久以前的一封信》。\n③ 10%概率，時間選錯，或誤認為是當天。。\n④ 10%概率，發送字數較少的無意義測試郵件，或包含敏感、惡意、廣告詞，被永久關進小黑屋。\n⑤ 5%概率，被你的郵箱運營商攔截了，常見於icloud、189、139、wo郵箱。這種情況我們也控制不了，抱歉。\n⑥ 5%概率。當天寄信量特別多，如1月1日、2月14日、農曆春節、9月開學、12月25日等，將順延1~2天。"
+							}, {
+								"id": 5,
+								"question": "5.我的手機添加照片時為什麼不能多選？",
+								"answer": "這是你系統自帶相冊，在選擇照片時沒有默認呈現出多選的樣式，造成只能單選的誤解。\n其實你只要長按第一張照片，則會啟動多選功能，接著再選擇其他照片即可。",
+								"image":"img/select_img_android.gif",
+								"imageHeight":"720px"
+							}, {
+								"id": 6,
+								"question": "6.關於紙質信件",
+								"answer": "① 不包含錄音和照片內容\n② 目前寄送範圍僅支持中國大陸（內地）及港澳台。如果你需要寄到國際城市，由於快遞費用較高，可以聯繫我單獨處理 letter@to-future.net\n③ 法定節假日無法寄送信件"
+							}, {
+								"id": 7,
+								"question": "7.能不能查已經寄出的信？",
+								"answer": "既然寫完寄出了，就不要總想著這件事，等收到再說~\n如果一直能看到寫過的信，那就失去了未來寄給你的意義和驚喜。"
+							}, {
+								"id": 8,
+								"question": "8.進了小黑屋怎麼辦？",
+								"answer": "如果你寄信時提示被關進小黑屋，代表至少有下列一種行為：\n  ① 發送字數較少的無意義或測試信件\n  ② 給多個不同郵箱/無效郵箱頻繁發送信件\n  ③ 發送匿名信件\n  ④ 信件內容違反《給未來寫封信內容規範》\n如有疑問，可郵件至 letter@to-future.net 進行申訴。郵件正文請寫申訴理由和曾寄出信件的收信郵箱，便於我們查詢。若48小時內未回覆郵件，則表示申訴不通過。"
+							}, {
+								"id": 9,
+								"question": "9.為什麼錄音、照片和紙質信件要收費？",
+								"answer": "因為我們要定期支付服務器費用、郵件發送費用、雲存儲費用，這些都是不小的成本，請理解。\n我們為了保持純粹，拒絕了很多廣告合作，也沒有其他流氓的灰色收入，一直在貼錢做這款產品。大家的好評和每天都在寄出的感動，讓我們心甘情願堅持。能少一些負擔，我們也是很開心的（´v｀）"
+							}]
+						}
+
+						if(info.list) {
+							var list = info.list;
+							var arr = [];
+							for(var i = 0; i < list.length; i++) {
+								var obj = list[i];
+								obj["open"] = null;
+								obj["pid"] = "itemPId" + i;
+								arr.push(obj);
+							}
+							that.list = arr;
+						}
+
+					},
+					titleClick: function(index) {
+						var obj = this.list[index];
+						obj.open = !obj.open;
+						this.list[index] = obj;
+						setTimeout(function() {
+							var pid = "itemPId" + index;
+							var pdom = document.getElementById(pid);
+							if(obj.open) {
+								pdom.style.height = pdom.scrollHeight + "px";
+								console.log(pdom.scrollHeight)
+							} else {
+								pdom.style.height = 0;
+							}
+						}, 1);
+					}
+				}
+			})
+		</script>
+		<script type="text/javascript">
+			var images = new Array()
+            function preload() {
+                for (i = 0; i < preload.arguments.length; i++) {
+                    images[i] = new Image()
+                    images[i].src = preload.arguments[i]
+                }
+            }
+            preload(
+                "img/img_real_letter.jpg",
+                "img/img_wechat_remind.jpg",
+                "img/select_img_android.gif"
+            )
+		</script>
+	</body>
+
+</html>
