@@ -10,12 +10,17 @@
 		<style>
 			html{
 				background-image: url(img/letter_bkg.png);
-				background: -image-set(
-						url(img/letter_bkg.png) 1x,
-						url(img/letter_bkg_2x.png) 2x,
-						url(img/letter_bkg_3x.png) 3x
-				);
 				text-shadow:0px -1px 2px #58838366;
+			}
+			@media only screen and (min-device-pixel-ratio:2){
+				html{
+					background-image: url(img/letter_bkg_2x.png);
+				}
+			}
+			@media only screen and (min-device-pixel-ratio:3){
+				html{
+					background-image: url(img/letter_bkg_3x.png);
+				}
 			}
 			.boxLanguage{
 				font-size: 0.3rem;
@@ -133,7 +138,7 @@
 	</head>
 
 	<body>
-		<div class="boxLanguage">简体中文&nbsp;&nbsp;<a href="traditional.html">繁體中文</a>&nbsp;&nbsp;<a href="eng.html">English</a></div>
+		<div class="boxLanguage">A简体中文&nbsp;&nbsp;<a href="traditional.html">繁體中文</a>&nbsp;&nbsp;<a href="eng.html">English</a></div>
 		<div id="questions">
 			<div class="title">
 					⚠️公告
